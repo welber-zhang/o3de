@@ -803,6 +803,13 @@ namespace AzToolsFramework
             return HandleTypeConversion(value, toType, convertedValue);
         }
 
+        if (fromType == AZ::AzTypeInfo<AZStd::string_view>::Uuid())
+        {
+            const auto& value = *static_cast<const AZStd::string_view*>(sourceValuePtr);
+            convertedValue = aznumeric_cast<const AZStd::string_view>(value);
+            return &convertedValue;
+        }
+
         return nullptr;
     }
 
